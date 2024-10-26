@@ -82,3 +82,27 @@ print(DTFT(x, xi_v, nu_v))
 #result_pynfft = pynfft(4, 4, xi_h)
 
 #result_pynfft = pynfft(4, 4, xi_h)
+
+
+
+
+#Rascunho
+def DTFT(x, xi, nu):
+    m, n = x.shape
+
+    result = 0 + 0j
+    X = np.zeros((len(xi), len(nu)), dtype = complex)
+    for x_xi in range(len(xi)):
+        for y_nu in range(len(nu)):
+            for j in range(n):
+                for i in range(m):
+                    result += x[i,j] * np.exp(-1j*(j*xi + i*nu))
+            X[x_xi, y_nu] = result
+    return X
+
+
+    m, n = 16, 16
+parte_real = np.random.rand(m, n)
+parte_imaginaria = np.random.rand(m, n)
+matriz_complexa = parte_real + 1j * parte_imaginaria
+dtft_lino = DTFT(matriz_complexa, x_valores, y_valores)
